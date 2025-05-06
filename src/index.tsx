@@ -18,6 +18,10 @@ root.render(
       appearance={{
         baseTheme: undefined
       }}
+      allowedRedirectOrigins={[
+        'earnalytics.app',
+        '*.vercel.app'
+      ]}
     >
       <App />
     </ClerkProvider>
