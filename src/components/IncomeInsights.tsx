@@ -48,9 +48,6 @@ const IncomeInsights: React.FC<IncomeInsightsProps> = ({ platforms, months }) =>
 
   const totalEarnings = platforms.reduce((sum, platform) => sum + platform.income, 0);
   
-  // Use provided months or default to all months
-  const allMonths = platforms[0]?.historicalEarnings.map(e => e.month) || [];
-
   // Pie chart data (current month)
   const pieData = platformsWithUnifiedEarnings.map(platform => ({
     name: platform.name,
