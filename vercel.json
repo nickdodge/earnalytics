@@ -9,12 +9,6 @@
       }
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
   "env": {
     "REACT_APP_CLERK_PUBLISHABLE_KEY": "pk_test_bm92ZWwtZHVja2xpbmctNDYuY2xlcmsuYWNjb3VudHMuZGV2JA"
   }
