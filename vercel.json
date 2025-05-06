@@ -12,6 +12,5 @@
   "env": {
     "REACT_APP_CLERK_PUBLISHABLE_KEY": "@clerk_publishable_key"
   },
-  "domains": ["earnalytics.app"],
   "alias": ["earnalytics.app"]
 } 
