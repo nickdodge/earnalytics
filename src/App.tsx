@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [showFirstTimeWelcome, setShowFirstTimeWelcome] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showPlatformConnection, setShowPlatformConnection] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Platform/income/modal state
   const [platforms, setPlatforms] = useState<PlatformData[]>([]);
@@ -28,14 +29,16 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (isSignedIn) {
-      const saved = secureStorage.getItem('platforms');
-      if (saved) {
-        try {
+      try {
+        const saved = secureStorage.getItem('platforms');
+        if (saved) {
           setPlatforms(saved);
-        } catch (e) {
+        } else {
           setPlatforms(platformData);
         }
-      } else {
+      } catch (e) {
+        console.error('Error loading platforms:', e);
+        setError('Failed to load platforms data');
         setPlatforms(platformData);
       }
     }
@@ -166,51 +169,78 @@ const App: React.FC = () => {
   };
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100 p-4 rounded-lg max-w-md w-full text-center">
+          <h2 className="text-xl font-semibold mb-2">Error</h2>
+          <p>{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {!isSignedIn ? (
-        <div className="flex items-center justify-center min-h-screen">
-          <SignIn
-            appearance={{
-              elements: {
-                formButtonPrimary: 'bg-blue-600 hover:bg-blue-700',
-                footerActionLink: 'text-blue-600 hover:text-blue-700',
-              },
-            }}
-            routing="path"
-            path="/sign-in"
-            signUpUrl="/sign-up"
-            redirectUrl="/"
-          />
-        </div>
-      ) : (
-        <>
-          {showWelcome && <WelcomeModal />}
-          {showFirstTimeWelcome && (
-            <FirstTimeWelcomeModal
-              isOpen={showFirstTimeWelcome}
-              onClose={() => setShowFirstTimeWelcome(false)}
-              onAddPlatform={() => setShowPlatformConnection(true)}
+    <BrowserRouter>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        {!isSignedIn ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <SignIn
+              appearance={{
+                elements: {
+                  formButtonPrimary: 'bg-blue-600 hover:bg-blue-700',
+                  footerActionLink: 'text-blue-600 hover:text-blue-700',
+                },
+              }}
+              routing="path"
+              path="/sign-in"
+              signUpUrl="/sign-up"
+              redirectUrl="/"
             />
-          )}
-          {showPlatformConnection && (
-            <PlatformConnectionModal
-              isOpen={showPlatformConnection}
-              onClose={() => setShowPlatformConnection(false)}
-              onConnect={handleConnectPlatform}
-            />
-          )}
-          {showOnboarding && (
-            <OnboardingModal
-              isOpen={showOnboarding}
-              onClose={() => setShowOnboarding(false)}
-              onAddManualIncome={() => setShowOnboarding(false)}
-            />
-          )}
-          <BrowserRouter>
+          </div>
+        ) : (
+          <>
+            {showWelcome && <WelcomeModal />}
+            {showFirstTimeWelcome && (
+              <FirstTimeWelcomeModal
+                isOpen={showFirstTimeWelcome}
+                onClose={() => setShowFirstTimeWelcome(false)}
+                onAddPlatform={() => setShowPlatformConnection(true)}
+              />
+            )}
+            {showPlatformConnection && (
+              <PlatformConnectionModal
+                isOpen={showPlatformConnection}
+                onClose={() => setShowPlatformConnection(false)}
+                onConnect={handleConnectPlatform}
+              />
+            )}
+            {showOnboarding && (
+              <OnboardingModal
+                isOpen={showOnboarding}
+                onClose={() => setShowOnboarding(false)}
+                onAddManualIncome={() => {
+                  setShowOnboarding(false);
+                  setIsModalOpen(true);
+                }}
+              />
+            )}
             <AppRoutes
               platforms={platforms}
               manualIncomes={manualIncomes}
@@ -222,10 +252,10 @@ const App: React.FC = () => {
               onModalClose={() => setIsModalOpen(false)}
               onModalOpen={() => setIsModalOpen(true)}
             />
-          </BrowserRouter>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </BrowserRouter>
   );
 };
 
