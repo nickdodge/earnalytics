@@ -16,6 +16,6 @@
     }
   ],
   "env": {
-    "REACT_APP_CLERK_PUBLISHABLE_KEY": "@clerk_publishable_key"
+    "REACT_APP_CLERK_PUBLISHABLE_KEY": "pk_test_bm92ZWwtZHVja2xpbmctNDYuY2xlcmsuYWNjb3VudHMuZGV2JA"
   }
 } 
