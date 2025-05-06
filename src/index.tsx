@@ -13,7 +13,12 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider 
+      publishableKey={PUBLISHABLE_KEY}
+      appearance={{
+        baseTheme: undefined
+      }}
+    >
       <App />
     </ClerkProvider>
   </React.StrictMode>

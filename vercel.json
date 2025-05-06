@@ -12,5 +12,16 @@
   "env": {
     "REACT_APP_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsuZWFybmFseXRpY3MuYXBwJA"
   },
-  "alias": ["earnalytics.app"]
+  "alias": ["earnalytics.app"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
 } 
