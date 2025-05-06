@@ -9,19 +9,6 @@ interface IncomeCardProps {
   onEdit?: () => void;
 }
 
-const getPlatformLogo = (platformName: string) => {
-  switch (platformName.toLowerCase()) {
-    case 'youtube':
-      return '📺';
-    case 'twitch':
-      return '🎮';
-    case 'tiktok':
-      return '🎵';
-    default:
-      return '💼';
-  }
-};
-
 const getChartColor = (platformName: string) => {
   switch (platformName.toLowerCase()) {
     case 'youtube':

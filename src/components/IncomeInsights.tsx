@@ -50,7 +50,6 @@ const IncomeInsights: React.FC<IncomeInsightsProps> = ({ platforms, months }) =>
   
   // Use provided months or default to all months
   const allMonths = platforms[0]?.historicalEarnings.map(e => e.month) || [];
-  const filteredMonths = months && months.length > 0 ? months : allMonths;
 
   // Pie chart data (current month)
   const pieData = platformsWithUnifiedEarnings.map(platform => ({
