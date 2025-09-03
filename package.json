@@ -29,6 +29,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "npm start",
+    "db:migrate": "echo \"No migrations script found\"",
+    "db:seed": "echo \"No seed script found\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
