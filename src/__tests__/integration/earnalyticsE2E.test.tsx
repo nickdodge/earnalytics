@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
+/* eslint-disable testing-library/no-unnecessary-act, testing-library/no-wait-for-multiple-assertions */
+import { render, screen, waitFor, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Dashboard from '../../components/Dashboard';
 import { CustomIncomeEntry } from '../../types/CustomIncome';
-import { PlatformData } from '../../data/mockData';
 import { act } from 'react-dom/test-utils';
 
 // Mock the Modal component
