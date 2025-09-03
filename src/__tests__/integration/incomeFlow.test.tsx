@@ -1,10 +1,10 @@
+/* eslint-disable testing-library/no-unnecessary-act, testing-library/no-wait-for-multiple-assertions, testing-library/no-node-access */
 import React from 'react';
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import AddPlatformModal from '../../components/AddPlatformModal';
 import Dashboard from '../../components/Dashboard';
 import { CustomIncomeEntry } from '../../types/CustomIncome';
-import { PlatformData } from '../../data/mockData';
 
 // Mock the Modal component
 jest.mock('../../components/Modal', () => {
@@ -134,6 +134,7 @@ describe('Income Flow Integration', () => {
       tags: ['streaming', 'manual'],
       color: '#9146FF',
       logo: '🎮',
+      type: 'manual',
       historicalEarnings: [
         { month: 'May', amount: 150 }
       ]

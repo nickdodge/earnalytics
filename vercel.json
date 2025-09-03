@@ -10,7 +10,7 @@
     }
   ],
   "env": {
-    "REACT_APP_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsuZWFybmFseXRpY3MuYXBwJA"
+    "REACT_APP_CLERK_PUBLISHABLE_KEY": ""
   },
   "alias": ["earnalytics.app"],
   "headers": [

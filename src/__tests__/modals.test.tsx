@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-wait-for-multiple-assertions, testing-library/no-wait-for-side-effects */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import AddPlatformModal from '../components/AddPlatformModal';
@@ -22,6 +23,7 @@ jest.mock('../components/Modal', () => {
 
 describe('Modal Components', () => {
   const mockPlatform: PlatformData = {
+    id: '1',
     name: 'YouTube',
     income: 1000,
     textColor: 'text-red-600',
@@ -42,6 +44,7 @@ describe('Modal Components', () => {
     tags: ['freelance', 'work'],
     color: '#000000',
     logo: '💼',
+    type: 'manual',
     historicalEarnings: [
       { month: 'Jan', amount: 400 },
       { month: 'Feb', amount: 450 },
